@@ -1,6 +1,6 @@
 # bottom_navigation_sample
 
-A new Flutter project.
+Riverpod,Fook,Freezedを使用したBottomNavigationサンプル
 
 ## Getting Started
 

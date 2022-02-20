@@ -11,6 +11,7 @@ class Home extends HookConsumerWidget {
     final counter = useState(0); // hookの機能っぽい？ グローバルにならないということ？
 
     return Scaffold(
+      appBar: AppBar(title: const Text('Hook example')),
       body: Center(
         child: Text('${counter.value}'),
       ),

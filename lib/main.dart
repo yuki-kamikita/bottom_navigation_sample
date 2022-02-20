@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:bottom_navigation_sample/pages/Home.dart';
-import 'package:bottom_navigation_sample/pages/Business.dart';
+import 'package:bottom_navigation_sample/pages/home.dart';
+import 'package:bottom_navigation_sample/pages/business.dart';
 
 void main() => runApp(const ProviderScope(child: MyApp()));
 
@@ -35,12 +35,18 @@ class BottomNavigation extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final PageController controller = PageController();
+    final PageController pageController = PageController(initialPage: ref.read(navigationIndexProvider.state).state);
+    // final pageProvider = Provider((ref) {
+    //   final index = ref.watch(navigationIndexProvider);
+    //   pageController.animateToPage(index,
+    //       duration: const Duration(milliseconds: 1000), curve: Curves.ease);
+    //   return index;
+    // });
     return Scaffold(
       appBar: AppBar(title: const Text('App Bar')),
       body:
       PageView(
-        controller: controller,
+        controller: pageController,
         onPageChanged: (int index) {
           ref.read(navigationIndexProvider.state).state = index;
         },
@@ -50,9 +56,6 @@ class BottomNavigation extends HookConsumerWidget {
           Center(child: Text('${ref.watch(navigationIndexProvider)}'),)
         ],
       ),
-      // Center(
-      //   child: Text('${ref.watch(navigationIndexProvider)}'),
-      // ),
       bottomNavigationBar: BottomNavigationBar(
         // items: navigationWidget,
         items: const <BottomNavigationBarItem>[
@@ -79,8 +82,8 @@ class BottomNavigation extends HookConsumerWidget {
         ],
         currentIndex: ref.read(navigationIndexProvider.state).state,
         selectedItemColor: Colors.amber[800],
-        onTap: (int index) => controller.animateToPage(index,
-            duration: const Duration(milliseconds: 1000), curve: Curves.ease),
+        onTap: (int index) => pageController.animateToPage(index,
+            duration: const Duration(milliseconds: 1000), curve: Curves.ease), // TODO: stateProviderを変更したらここが自動で動くようにしたい
       ),
     );
   }
