@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-// import 'package:riverpod_sample_2/pages/Home.dart';
-// import 'package:riverpod_sample_2/pages/Business.dart';
+import 'package:bottom_navigation_sample/pages/Home.dart';
+import 'package:bottom_navigation_sample/pages/Business.dart';
 
 void main() => runApp(const ProviderScope(child: MyApp()));
 
@@ -45,10 +45,8 @@ class BottomNavigation extends HookConsumerWidget {
           ref.read(navigationIndexProvider.state).state = index;
         },
         children: <Widget>[
-          // const Center(child: Home(),),
-          // const Center(child: Business(),),
-          Center(child: Text('${ref.watch(navigationIndexProvider)}'),),
-          Center(child: Text('${ref.watch(navigationIndexProvider)}'),),
+          const Center(child: Home(),),
+          const Center(child: Business(),),
           Center(child: Text('${ref.watch(navigationIndexProvider)}'),)
         ],
       ),
